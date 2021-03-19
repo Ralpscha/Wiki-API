@@ -1,0 +1,15 @@
+<%- include('header') -%>
+<h1>Welkom bij de artikelen</h1>
+
+<div class="box">
+    <% foundArticles.forEach(function(article) { %>
+        <div>
+            <p><%=  article.title  %></p>
+            <p><%=  article.content  %></p>
+        </div>
+    <% }) %>
+
+</div>
+
+
+<%- include('footer') -%>
