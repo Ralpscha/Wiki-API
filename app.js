@@ -61,44 +61,6 @@ app.route('/articles')
     });
 
 
-// app.get('/articles', function (req, res) {
-//   Article.find( {}, function (err, foundArticles) {
-//     // console.log(foundArticles);
-//     // res.render('articles', {foundArticles: foundArticles});
-//     if(!err){
-//       res.send(foundArticles);
-//     } else{
-//       res.send(err);
-//     }
-//   });
-// });
-//
-app.post('/articles', function (req, res) {
-
-  const newArticle = new Article({
-    title: req.body.title,
-    content: req.body.content
-  });
-
-  newArticle.save(function (err) {
-    if (!err) {
-      res.send("Succesfully added a new article");
-    } else {
-      res.send(err);
-    }
-  });
-});
-//
-// app.delete('/articles', function (req, res){
-//   Article.deleteMany( function (err) {
-//     if(!err) {
-//       res.send('Succesfully deleted all');
-//     } else {
-//       res.send(err);
-//     }
-//   });
-// })
-
 app.listen(3000, function () {
   console.log("Server gestart op poort 3000");
 });
