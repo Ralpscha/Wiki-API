@@ -65,7 +65,7 @@ app.route('/articles')
 /////////////////// Request Targetting A Specific Document //////////////////////
 
 app.route('/articles/:articleTitle')
-    .get(function (req,res) {
+    .get(function (req, res) {
 
       Article.findOne({title: req.params.articleTitle}, function (err, foundArticle) {
         if (foundArticle) {
@@ -76,19 +76,30 @@ app.route('/articles/:articleTitle')
       });
     })
 
-    .put(function (req,res){
+    .put(function (req, res) {
       Article.update(
           {title: req.params.articleTitle},
           {title: req.body.title, content: req.body.content},
-          {overwrite: true },
+          {overwrite: true},
           function (err) {
             if (!err) {
               res.send("Succesfully updated article.");
             }
-      });
+          });
+    })
+
+    .patch(function (req, res) {
+      Article.update({title: req.params.articleTitle},
+          {$set: req.body},
+          function (err) {
+            if (!err) {
+              res.send("Succesfully updated article");
+            } else {
+              res.send(err);
+            }
+          }
+      );
     });
-
-
 
 app.listen(3000, function () {
   console.log("Server gestart op poort 3000");
