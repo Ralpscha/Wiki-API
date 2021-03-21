@@ -67,14 +67,28 @@ app.route('/articles')
 app.route('/articles/:articleTitle')
     .get(function (req,res) {
 
-      Article.findOne({title: req.params.articleTitle}, function (err, foundArticle){
-        if(foundArticle){
+      Article.findOne({title: req.params.articleTitle}, function (err, foundArticle) {
+        if (foundArticle) {
           res.send(foundArticle);
         } else {
-          res.send("No articles with that title where found.")
+          res.send("No articles with that title where found.");
         }
       });
+    })
+
+    .put(function (req,res){
+      Article.update(
+          {title: req.params.articleTitle},
+          {title: req.body.title, content: req.body.content},
+          {overwrite: true },
+          function (err) {
+            if (!err) {
+              res.send("Succesfully updated article.");
+            }
+      });
     });
+
+
 
 app.listen(3000, function () {
   console.log("Server gestart op poort 3000");
